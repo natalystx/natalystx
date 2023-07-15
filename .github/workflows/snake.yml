@@ -1,30 +1,35 @@
-name: Generate snake animation
+name: website
 
-on:
-  schedule: # execute every 12 hours
-    - cron: "* */12 * * *"
-
-  workflow_dispatch:
-
-  push:
-    branches:
-      - main
+on: push
 
 jobs:
-  generate:
+  publish:
     runs-on: ubuntu-latest
-
     steps:
-      - name: generate snake.svg
-        uses: Platane/snk/svg-only@v2
+      -
+        name: Checkout
+        uses: actions/checkout@v3
+      -
+        name: Gen dummy page
+        run: |
+          mkdir public
+          cat > public/index.html <<EOL
+          <!doctype html>
+          <html>
+            <head>
+              <title>GitHub Pages deployed!</title>
+            </head>
+            <body>
+              <p>GitHub Pages with <strong>${{ github.sha }}</strong> commit ID has been deployed through <a href="https://github.com/marketplace/actions/github-pages">GitHub Pages action</a> successfully.</p>
+            </body>
+          </html>
+          EOL
+      -
+        name: Deploy to GitHub Pages
+        if: success()
+        uses: crazy-max/ghaction-github-pages@v3
         with:
-          github_user_name: ${{ github.repository_owner }}
-          outputs: dist/snake.svg
-
-      - name: push snake.svg to the output branch
-        uses: crazy-max/ghaction-github-pages@v3.1.0
-        with:
-          target_branch: output
-          build_dir: dist
+          target_branch: gh-pages
+          build_dir: public
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
