@@ -1,6 +1,8 @@
 name: website
 
-on: push
+on:
+  schedule: # execute every 12 hours
+    - cron: "* */72 * * *"
 
 jobs:
   publish:
