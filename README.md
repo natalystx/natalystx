@@ -1,4 +1,4 @@
-<h2 align="left">Hi 👋! My name is  Nattapong Anuwong. Called me "Nut" and I'm a Frontend developer 🖥, from Chiang Mai, Thailand 🇹🇭</h2>
+<h2 align="left">Hi 👋! My name is  Nattapong Anuwong. Called me "Nut" and I'm cat litter cleaner 🐱, Side job as a Frontend Engineer, from Chiang Mai, Thailand 🇹🇭</h2>
 
 ###
 
